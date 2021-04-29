@@ -1,0 +1,150 @@
+/* ---
+  Styles:
+    • button--border
+    • button--arrow
+  Colors:
+    • button--red (default)
+    • button--gray
+    • button--violet
+    • button--gray
+--- */
+
+.button {
+  $root: &;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  height: 56px;
+  padding: 0 23px;
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: (16 / 13);
+  text-align: center;
+  letter-spacing: 0.065rem;
+  text-transform: uppercase;
+  overflow: hidden;
+  transform: translateZ(0);
+  z-index: 1;
+  border: 1px solid transparent;
+  color: $c-red-01;
+  background-color: currentColor;
+  transition: color $tr;
+
+  @include rwd('large-tablet') {
+    height: 40px;
+  }
+
+  &:before {
+    // z-index: -1;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: $c-white;
+    transition: transform $tr;
+    transform: translateX(-100%);
+
+    @include rtl {
+      transform: translateX(100%);
+    }
+  }
+  &:hover {
+    &:before {
+      transform: translateX(0);
+
+      @include rtl {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &--gray {
+    color: $c-gray-01;
+  }
+
+  &--violet {
+    color: $c-violet-01;
+  }
+
+  &--border {
+    border-color: currentColor;
+    background-color: transparent;
+
+    &:before {
+      background-color: currentColor;
+    }
+  }
+
+  &--arrow {
+    &:before {
+      display: none;
+    }
+  }
+
+  &__text {
+    z-index: 1;
+    position: relative;
+    display: block;
+    transition: color $tr, transform $tr;
+    color: $c-white;
+
+    #{$root}:hover & {
+      color: currentColor;
+    }
+
+    #{$root}--border & {
+      color: currentColor;
+    }
+    #{$root}--border:hover & {
+      color: $c-white;
+    }
+
+    #{$root}--border#{$root}--arrow:hover & {
+      color: currentColor;
+    }
+
+    #{$root}--arrow & {
+      &:before {
+        // @include icomoon('polygon');
+        display: block;
+        color: currentColor;
+        font-size: 12px;
+        position: absolute;
+        top: 50%;
+        left: -23px;
+        transform: translateY(-50%);
+
+        @include rtl {
+          left: auto;
+          right: -23px;
+          transform: translateY(-50%) scaleX(-1);
+        }
+      }
+    }
+    #{$root}--arrow:hover & {
+      color: $c-white;
+      transform: translateX(12px);
+
+      @include rtl {
+        transform: translateX(-12px);
+      }
+    }
+
+    #{$root}--border#{$root}--arrow & {
+      &:before {
+        left: -24px;
+        
+        @include rtl {
+          left: auto;
+          right: -24px;
+        }
+      }
+    }
+  }
+}

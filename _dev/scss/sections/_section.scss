@@ -1,0 +1,55 @@
+.section {
+  $section: &;
+
+  &__headline {
+    padding: 8px 0;
+    font-size: 4.2rem;
+    font-weight: 500;
+    line-height: (54 / 42);
+
+    &--small {
+      font-size: 3rem;
+    }
+
+    &--violet {
+      color: $c-violet-01;
+    }
+
+    @include rwd('large-tablet') {
+      padding: 12px 0;
+      font-size: 3rem;
+    }
+  }
+
+  &__subheading {
+    padding: 8px 0;
+    font-size: 1.8rem;
+    line-height: (30 / 18);
+    font-weight: 400;
+
+    @include rwd('large-tablet') {
+      padding: 12px 0;
+      font-size: 1.6rem;
+    }
+    
+    #{$section}__headline + & {
+      margin-top: 1.6em;
+    }
+  }
+
+  &--culture {
+    min-height: 100vh;
+
+    @include rwd('tablet') {
+      min-height: 0;
+    }
+
+    & + & {
+      margin-top: 0;
+
+      @include rwd('large-tablet') {
+        margin-top: 0;
+      }
+    }
+  }
+}
